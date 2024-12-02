@@ -10,15 +10,15 @@ import {
 import { Product } from "@prisma/client";
 import { ClipboardCopyIcon, MoreHorizontalIcon, TrashIcon } from "lucide-react";
 
-interface SalesProductTableDropDownMenuProps {
+interface UpsertSalesProductTableDropDownMenuProps {
   product: Pick<Product, "id">;
   onDelete: (productId: string) => void;
 }
 
-const SalesTableDropDownMenu = ({
+const UpsertSaleTableDropDownMenu = ({
   product,
   onDelete,
-}: SalesProductTableDropDownMenuProps) => {
+}: UpsertSalesProductTableDropDownMenuProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -49,4 +49,4 @@ const SalesTableDropDownMenu = ({
   );
 };
 
-export default SalesTableDropDownMenu;
+export default UpsertSaleTableDropDownMenu;
