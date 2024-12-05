@@ -18,7 +18,6 @@ export interface MostSoldProductDto {
 }
 
 interface DashboardDto {
-  totalRevenue: number;
   todayRevenue: number;
   totalSales: number;
   totalStock: number;
@@ -56,10 +55,6 @@ export const getDashboard = async (): Promise<DashboardDto> => {
   }
 
   //pegar todos os produtos vendidos e somar o valor total
-  const totalRevenueQuery = `
-    SELECT SUM("unityPrice" * "quantity") as "totalRevenue"
-    FROM "SaleProduct"
-   `;
 
   const todayRevenueQuery = `
     SELECT SUM("unityPrice" * "quantity") as "todayRevenue"
@@ -70,8 +65,7 @@ export const getDashboard = async (): Promise<DashboardDto> => {
   const endOfDay = new Date(new Date().setHours(23, 59, 59, 999));
 
   // Run the raw SQL queries
-  const totalRevenuePromise =
-    db.$queryRawUnsafe<{ totalRevenue: number }[]>(totalRevenueQuery);
+
   const todayRevenuePromise = db.$queryRawUnsafe<{ todayRevenue: number }[]>(
     todayRevenueQuery,
     startOfDay,
@@ -105,14 +99,12 @@ export const getDashboard = async (): Promise<DashboardDto> => {
   >(mostSoldProductsQuery);
 
   const [
-    totalRevenue,
     todayRevenue,
     totalSales,
     totalStock,
     totalProducts,
     mostSoldProducts,
   ] = await Promise.all([
-    totalRevenuePromise,
     todayRevenuePromise,
     totalSalesPromise,
     totalStockPromise,
@@ -121,7 +113,6 @@ export const getDashboard = async (): Promise<DashboardDto> => {
   ]);
 
   return {
-    totalRevenue: totalRevenue[0].totalRevenue,
     todayRevenue: todayRevenue[0].todayRevenue,
     totalSales,
     totalStock: Number(totalStock._sum.stock),
