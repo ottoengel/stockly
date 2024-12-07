@@ -1,13 +1,15 @@
 "use client";
 
-import { SalesDto } from "@/app/_data-access/sale/get-sales";
 import { formatCurrency } from "@/app/_helpers/currency";
 import { ColumnDef } from "@tanstack/react-table";
 import SalesTableDropdownMenu from "./table-dropdown-menu";
+
 import { ComboboxOption } from "@/app/_components/ui/combobox";
+import { SalesDto } from "@/app/_data-access/sale/get-sales";
+import { productDto } from "@/app/_data-access/product/get-products";
 
 interface SaleTableColumn extends SalesDto {
-  products: SalesDto[];
+  products: productDto[];
   productOptions: ComboboxOption[];
 }
 
