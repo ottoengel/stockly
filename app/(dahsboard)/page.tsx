@@ -16,6 +16,9 @@ import MostSoldProducts, {
   MostSoldProductItemSkeleton,
 } from "./_components/most-sold-products";
 
+// Essa página será montada do zero a cada acesso (SSR)
+export const dynamic = "force-dynamic";
+
 const Home = async () => {
   return (
     <div className="m-8 flex w-full flex-col space-y-8 rounded-lg">
@@ -26,7 +29,7 @@ const Home = async () => {
         </HeaderLeft>
       </Header>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6">
         <Suspense fallback={<SummaryCardSkeleton />}>
           <TotalRevenueCard />
         </Suspense>
@@ -36,7 +39,7 @@ const Home = async () => {
         </Suspense>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
         <Suspense fallback={<SummaryCardSkeleton />}>
           <TotalSalesCard />
         </Suspense>
@@ -50,7 +53,7 @@ const Home = async () => {
         </Suspense>
       </div>
 
-      <div className="grid min-h-0 grid-cols-[minmax(0,2.5fr),minmax(0,1fr)] gap-6">
+      <div className="grid grid-cols-1 gap-6 pb-3 sm:grid-cols-[minmax(0,1fr)] md:min-h-0 lg:grid-cols-[minmax(0,2.5fr),minmax(0,1fr)]">
         <Suspense
           fallback={
             <Skeleton className="bg-white p-6">

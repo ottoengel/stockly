@@ -5,13 +5,13 @@ import SidebarButton from "./sidebar-button";
 
 const Sidebar = () => {
   return (
-    <div className="w-64 bg-white">
+    <div className="fixed w-full bg-white md:relative md:w-64">
       {/* IMAGEM */}
-      <div className="px-8 py-6">
+      <div className="px-8 py-1 md:py-6">
         <h1 className="text-2xl font-bold">STOCKLY</h1>
       </div>
       {/* BOTOES */}
-      <div className="flex flex-col gap-2 p-2">
+      <div className="flex flex-row gap-2 p-2 md:flex-col">
         <SidebarButton href="/">
           <LayoutGridIcon size={20} />
           Dashboard
